@@ -24,6 +24,18 @@ function App() {
       setTimeLeftMinutes(timeLeftMinutes - 1);
     }
 
+    if (timerRunning && timeLeftSeconds === 0 && timeLeftMinutes === 0 && timerLabel === 'Session') {
+      setTimerLabel('Break');
+      setTimeLeftSeconds('00');
+      setTimeLeftMinutes(breakLength);
+    }
+
+    if (timerRunning && timeLeftSeconds === 0 && timeLeftMinutes === 0 && timerLabel === 'Break') {
+      setTimerLabel('Session');
+      setTimeLeftSeconds('00');
+      setTimeLeftMinutes(sessionLength);
+    }
+
     setFormattedTime(`${timeLeftMinutes}:${timeLeftSeconds}`);
 
     return () => clearInterval(timer);

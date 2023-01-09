@@ -116,29 +116,29 @@ function App() {
     <div className="wrapper">
       <div className='topRow'>
         <div className='block'>
-          <h2 id="break-label">Break Length</h2>
+          <h2 id="break-label" className='text'>Break Length</h2>
           <div className='blockRow'>
-            <h2 onClick={decrementBreak} id="break-decrement">-</h2>
-            <h2 id="break-length">{breakLength}</h2>
-            <h2 onClick={incrementBreak} id="break-increment">+</h2>
+            <h2 onClick={decrementBreak} id="break-decrement" className='operator'>-</h2>
+            <h2 id="break-length" className='text'>{breakLength}</h2>
+            <h2 onClick={incrementBreak} id="break-increment" className='operator'>+</h2>
           </div>
         </div>
         <div className='block'>
-          <h2 id="session-label">Session Length</h2>
+          <h2 id="session-label" className='text'>Session Length</h2>
           <div className='blockRow'>
-            <h2 onClick={decrementSession} id="session-decrement">-</h2>
-            <h2 id="session-length">{sessionLength}</h2>
-            <h2 onClick={incrementSession} id="session-increment">+</h2>
+            <h2 onClick={decrementSession} id="session-decrement" className='operator'>-</h2>
+            <h2 id="session-length" className='text'>{sessionLength}</h2>
+            <h2 onClick={incrementSession} id="session-increment" className='operator'>+</h2>
           </div>
         </div>
       </div>
         <div className='timerBlock'>
-          <h2 id="timer-label">{timerLabel}</h2>
-          <h2 id="time-left">{formattedTime}</h2>
+          <h2 id="timer-label" className='text'>{timerLabel}</h2>
+          <h2 id="time-left" className='text'>{formattedTime}</h2>
         </div>
         <div className='bottomRow'>
-          <button onClick={startStop} id="start_stop">StartStop</button>
-          <button onClick={reset} id="reset">Reset</button>
+          <button onClick={startStop} id="start_stop" className='button'>Start-Stop</button>
+          <button onClick={reset} id="reset" className='button'>Reset</button>
         </div>
         <audio src={beepSound} id="beep"></audio>
     </div>

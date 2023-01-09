@@ -4,19 +4,23 @@ html, body {
 }
 
 .wrapper {
-    width: 30%;
+    width: 40%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    background-color: grey;
+    background-color: rgb(6, 50, 65);
     justify-content: center;
     text-align: center;
-    margin-top: 10%;
+    margin-top: 5%;
+    border-radius: 20px;
+    padding: 3%;
+    border: solid 4px white;
 }
 
 .topRow {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
 
 .blockRow {
@@ -30,8 +34,47 @@ html, body {
 }
 
 .timerBlock {
-    border: solid 3px black;
+    border: solid 4px white;
     border-radius: 10px;
     width: 50%;
     margin: 0 auto;
+    padding: 2%;
+    margin-top: 20px;
+}
+
+.text {
+    color: white;
+    font-size: 30px;
+    margin: 10px;
+}
+
+.operator {
+    color: white;
+    font-size: 30px;
+    margin: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.operator:hover {
+    color: black;
+    transition: 0.5s;
+}
+
+.button {
+    font-size: 25px;
+    margin: 30px;
+    cursor: pointer;
+    padding: 10px;
+    border: solid 3px white;
+    border-radius: 15px;
+    transition: 0.5s;
+    background-color: rgb(5, 38, 48);
+    color: white;
+}
+
+.button:hover {
+    transition: 0.5s;
+    background-color: black;
+    color: white;
 }

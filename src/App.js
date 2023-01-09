@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
+import beepSound from './beep.wav';
+
 function App() {
   const [breakLength, setBreakLength] = useState(5);
   const [sessionLength, setSessionLength] = useState(25);
@@ -9,9 +11,26 @@ function App() {
   const [timerRunning, setTimerRunning] = useState(false);
 
   const [timeLeftMinutes, setTimeLeftMinutes] = useState('25');
-  const [timeLeftSeconds, setTimeLeftSeconds] = useState('4');
+  const [timeLeftSeconds, setTimeLeftSeconds] = useState('0');
 
   const [formattedTime, setFormattedTime] = useState('25:00');
+
+  const beep = document.getElementById('beep');
+
+  useEffect(() => {
+    if (timeLeftMinutes === 0 && timeLeftSeconds > 0) {
+      setFormattedTime(`0${timeLeftMinutes}:${timeLeftSeconds}`);
+    }
+    if (timeLeftMinutes === 0 && timeLeftSeconds < 10) {
+      setFormattedTime(`0${timeLeftMinutes}:0${timeLeftSeconds}`);
+    }
+    if (timeLeftSeconds < 10 && timeLeftMinutes > 0) {
+      setFormattedTime(`${timeLeftMinutes}:0${timeLeftSeconds}`);
+    }
+    if (timeLeftSeconds < 10 && timeLeftMinutes === 0) {
+      setFormattedTime(`0${timeLeftMinutes}:0${timeLeftSeconds}`);
+    }
+  })
 
   useEffect(() => {
     const timer = timeLeftSeconds > 0 && timerRunning && setInterval(() => setTimeLeftSeconds(timeLeftSeconds - 1), 1000);
@@ -19,21 +38,25 @@ function App() {
       setTimeLeftSeconds('59');
       setTimeLeftMinutes(timeLeftMinutes - 1);
     }
-    if (timerRunning && timeLeftSeconds === '00' && timeLeftMinutes >= 1) {
+    if (timerRunning && timeLeftSeconds === '0' && timeLeftMinutes >= 1) {
       setTimeLeftSeconds('59');
       setTimeLeftMinutes(timeLeftMinutes - 1);
     }
 
     if (timerRunning && timeLeftSeconds === 0 && timeLeftMinutes === 0 && timerLabel === 'Session') {
       setTimerLabel('Break');
-      setTimeLeftSeconds('00');
+      setTimeLeftSeconds('0');
       setTimeLeftMinutes(breakLength);
     }
 
     if (timerRunning && timeLeftSeconds === 0 && timeLeftMinutes === 0 && timerLabel === 'Break') {
       setTimerLabel('Session');
-      setTimeLeftSeconds('00');
+      setTimeLeftSeconds('0');
       setTimeLeftMinutes(sessionLength);
+    }
+
+    if (timeLeftMinutes === 0 && timeLeftSeconds === 0) {
+      beep.play();
     }
 
     setFormattedTime(`${timeLeftMinutes}:${timeLeftSeconds}`);
@@ -53,8 +76,10 @@ function App() {
     setBreakLength(5);
     setSessionLength(25);
     setTimeLeftMinutes(25)
-    setTimeLeftSeconds('00')
+    setTimeLeftSeconds('0')
     setTimerRunning(false);
+    beep.pause();
+    beep.currentTime = 0;
   };
 
   useEffect(() => {
@@ -115,6 +140,7 @@ function App() {
           <button onClick={startStop} id="start_stop">StartStop</button>
           <button onClick={reset} id="reset">Reset</button>
         </div>
+        <audio src={beepSound} id="beep"></audio>
     </div>
     </>
   );
